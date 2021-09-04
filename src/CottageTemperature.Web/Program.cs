@@ -1,20 +1,28 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 namespace CottageTemperature.Web
 {
-    public class Program
+    /// <summary>
+    ///     Application entry point.
+    /// </summary>
+    public static class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        ///     Main method.
+        /// </summary>
+        /// <param name="args"> Application arguments. </param>
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args)
+            await CreateHostBuilder(args)
                 .Build()
-                .Run();
+                .RunAsync();
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host
                 .CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }

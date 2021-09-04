@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using CottageTemperature.Web.ServiceFactories;
+﻿using CottageTemperature.Web.ServiceFactories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +10,7 @@ namespace CottageTemperature.Web.Extensions
             IConfiguration configuration)
         {
             return services
-                .AddSingleton(BotServiceFactory.Create(configuration));
+                .AddSingleton(provider => BotServiceFactory.Create(provider, configuration));
         }
     }
 }
