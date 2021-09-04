@@ -2,6 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>6471bca7-b674-440c-b5ba-48ce2c063c60</UserSecretsId>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Telegram.Bot" Version="16.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Libraries.Core\Libraries.Core.csproj" />
+      <ProjectReference Include="..\Libraries.Telegram\Libraries.Telegram.csproj" />
+    </ItemGroup>
 
 </Project>

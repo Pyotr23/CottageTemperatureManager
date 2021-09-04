@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CottageTemperature.Web", "CottageTemperature.Web\CottageTemperature.Web.csproj", "{D4574AFB-0BFE-48F9-B8CB-51E4BE308F6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libraries", "libraries", "{B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries.Core", "Libraries.Core\Libraries.Core.csproj", "{F1681DFA-233A-433C-BC25-AB0B36FE91F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries.Telegram", "Libraries.Telegram\Libraries.Telegram.csproj", "{66B96AD9-9870-4869-B735-A7C6B0CECD7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{D4574AFB-0BFE-48F9-B8CB-51E4BE308F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4574AFB-0BFE-48F9-B8CB-51E4BE308F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4574AFB-0BFE-48F9-B8CB-51E4BE308F6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1681DFA-233A-433C-BC25-AB0B36FE91F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1681DFA-233A-433C-BC25-AB0B36FE91F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1681DFA-233A-433C-BC25-AB0B36FE91F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1681DFA-233A-433C-BC25-AB0B36FE91F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1681DFA-233A-433C-BC25-AB0B36FE91F3} = {B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}
+		{66B96AD9-9870-4869-B735-A7C6B0CECD7D} = {B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}
 	EndGlobalSection
 EndGlobal
