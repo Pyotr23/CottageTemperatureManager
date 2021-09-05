@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
+using Message = CottageTemperature.Libraries.Core.DTOes.Telegram.Message;
 
 namespace CottageTemperature.Web.Controllers
 {
@@ -13,14 +15,17 @@ namespace CottageTemperature.Web.Controllers
     public class UpdateController : Controller
     {
         private readonly ILogger<UpdateController> _logger;
+        private readonly IMapper _mapper;
 
         /// <summary>
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
-        public UpdateController(ILogger<UpdateController> logger)
+        /// <param name="mapper"> Mapper instance. </param>
+        public UpdateController(ILogger<UpdateController> logger, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -31,7 +36,15 @@ namespace CottageTemperature.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Update update)
         {
-            _logger.LogInformation("Start to handle update");
+            try
+            {
+                var message = _mapper.Map<Message>(update);
+                _logger.LogInformation("Start to handle {Message}", message);
+            }
+            catch (AutoMapperMappingException ex)
+            {
+                _logger.LogError(ex, "Failed mapping from update to message");
+            }
             return Ok(); 
         }
     }

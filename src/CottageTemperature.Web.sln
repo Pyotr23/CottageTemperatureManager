@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries.Core", "Libraries
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries.Telegram", "Libraries.Telegram\Libraries.Telegram.csproj", "{66B96AD9-9870-4869-B735-A7C6B0CECD7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries.MediatR", "Libraries.MediatR\Libraries.MediatR.csproj", "{90D575B2-29C7-4523-8707-8F59BA3706A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66B96AD9-9870-4869-B735-A7C6B0CECD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D575B2-29C7-4523-8707-8F59BA3706A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D575B2-29C7-4523-8707-8F59BA3706A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D575B2-29C7-4523-8707-8F59BA3706A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D575B2-29C7-4523-8707-8F59BA3706A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F1681DFA-233A-433C-BC25-AB0B36FE91F3} = {B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}
 		{66B96AD9-9870-4869-B735-A7C6B0CECD7D} = {B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}
+		{90D575B2-29C7-4523-8707-8F59BA3706A1} = {B4EFB226-B13A-4F4F-B1F3-CBA360943AF3}
 	EndGlobalSection
 EndGlobal

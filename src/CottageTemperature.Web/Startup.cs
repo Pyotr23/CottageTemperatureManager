@@ -1,4 +1,6 @@
 using CottageTemperature.Web.Extensions;
+using CottageTemperature.Web.MapperProfiles;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,8 @@ namespace CottageTemperature.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                // .AddMediatR()
+                .AddAutoMapper(config => config.AddProfile<TelegramMapperProfile>())
                 .AddServices(Configuration)
                 .AddControllers()
                 .AddNewtonsoftJson();
