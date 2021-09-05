@@ -1,3 +1,4 @@
+using CottageTemperature.Libraries.MediatR.Commands;
 using CottageTemperature.Web.Extensions;
 using CottageTemperature.Web.MapperProfiles;
 using MediatR;
@@ -32,7 +33,7 @@ namespace CottageTemperature.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                // .AddMediatR()
+                .AddMediatR(typeof(BaseCommand))
                 .AddAutoMapper(config => config.AddProfile<TelegramMapperProfile>())
                 .AddServices(Configuration)
                 .AddControllers()

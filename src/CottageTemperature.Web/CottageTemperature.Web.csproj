@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Libraries.Core\Libraries.Core.csproj" />
+      <ProjectReference Include="..\Libraries.MediatR\Libraries.MediatR.csproj" />
       <ProjectReference Include="..\Libraries.Telegram\Libraries.Telegram.csproj" />
     </ItemGroup>
 

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using CottageTemperature.Libraries.MediatR.Commands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
@@ -16,22 +18,26 @@ namespace CottageTemperature.Web.Controllers
     {
         private readonly ILogger<UpdateController> _logger;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
         /// <summary>
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
         /// <param name="mapper"> Mapper instance. </param>
-        public UpdateController(ILogger<UpdateController> logger, IMapper mapper)
+        /// <param name="mediator"> Mediator instance. </param>
+        public UpdateController(ILogger<UpdateController> logger, IMapper mapper, IMediator mediator)
         {
             _logger = logger;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         /// <summary>
         ///     Post method for receive messages from Bot (Using webhook).
         /// </summary>
         /// <param name="update"> New update from bot. </param>
+        /// <exception cref="AutoMapperMappingException"> Mapping exception. </exception>
         /// <returns> Ok action. </returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Update update)
@@ -39,11 +45,17 @@ namespace CottageTemperature.Web.Controllers
             try
             {
                 var message = _mapper.Map<Message>(update);
-                _logger.LogInformation("Start to handle {Message}", message);
+                if (message.IsCommand)
+                {
+                    _logger.LogInformation("Start to handle {Message}", message);
+                    await _mediator.Send(new MessageCommand(message));
+                }
+                else
+                    _logger.LogInformation("{Message} is not a command", message);
             }
-            catch (AutoMapperMappingException ex)
+            catch (AutoMapperMappingException exception)
             {
-                _logger.LogError(ex, "Failed mapping from update to message");
+                _logger.LogError(exception, "Failed mapping from update to message");
             }
             return Ok(); 
         }
