@@ -1,4 +1,4 @@
-﻿namespace CottageTemperature.Web.Configurations
+﻿namespace CottageTemperature.Libraries.Configuration.Sections
 {
     /// <summary>
     ///     Bot configuration section.

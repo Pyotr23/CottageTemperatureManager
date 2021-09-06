@@ -1,4 +1,5 @@
-﻿using CottageTemperature.Libraries.Core.Services;
+﻿using CottageTemperature.Libraries.Configuration;
+using CottageTemperature.Libraries.Core.Services;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 
@@ -8,7 +9,6 @@ namespace CottageTemperature.Libraries.Telegram
     public class BotService : IBotService
     {
         private readonly ILogger<BotService> _logger;
-        private readonly string? _accessToken;
         
         /// <inheritdoc cref="IBotService.Client"/>
         public TelegramBotClient Client { get; }
@@ -17,12 +17,11 @@ namespace CottageTemperature.Libraries.Telegram
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
-        /// <param name="accessToken"> Access token. </param>
-        public BotService(ILogger<BotService> logger, string? accessToken)
+        /// <param name="configuration"> Configuration parser. </param>
+        public BotService(ILogger<BotService> logger, ConfigurationParser configuration)
         {
             _logger = logger;
-            _accessToken = accessToken;
-            Client = new TelegramBotClient(accessToken);
+            Client = new TelegramBotClient(configuration.AccessToken);
         }
     }
 }

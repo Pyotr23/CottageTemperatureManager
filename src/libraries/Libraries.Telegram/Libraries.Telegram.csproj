@@ -12,6 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Libraries.Configuration\Libraries.Configuration.csproj" />
       <ProjectReference Include="..\Libraries.Core\Libraries.Core.csproj" />
     </ItemGroup>
 

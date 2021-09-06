@@ -19,9 +19,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Libraries.Core\Libraries.Core.csproj" />
-      <ProjectReference Include="..\Libraries.MediatR\Libraries.MediatR.csproj" />
-      <ProjectReference Include="..\Libraries.Telegram\Libraries.Telegram.csproj" />
+      <ProjectReference Include="..\libraries\Libraries.Configuration\Libraries.Configuration.csproj" />
+      <ProjectReference Include="..\libraries\Libraries.Core\Libraries.Core.csproj" />
+      <ProjectReference Include="..\libraries\Libraries.MediatR\Libraries.MediatR.csproj" />
+      <ProjectReference Include="..\libraries\Libraries.Telegram\Libraries.Telegram.csproj" />
     </ItemGroup>
 
 </Project>

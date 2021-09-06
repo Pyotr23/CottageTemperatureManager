@@ -1,4 +1,7 @@
+using CottageTemperature.Libraries.Configuration;
+using CottageTemperature.Libraries.Core.Services;
 using CottageTemperature.Libraries.MediatR.Commands;
+using CottageTemperature.Libraries.Telegram;
 using CottageTemperature.Web.Extensions;
 using CottageTemperature.Web.MapperProfiles;
 using MediatR;
@@ -35,7 +38,8 @@ namespace CottageTemperature.Web
             services
                 .AddMediatR(typeof(BaseCommand))
                 .AddAutoMapper(config => config.AddProfile<TelegramMapperProfile>())
-                .AddServices(Configuration)
+                .AddConfigurationParser(Configuration)
+                .AddTransient<IBotService, BotService>()
                 .AddControllers()
                 .AddNewtonsoftJson();
         }
