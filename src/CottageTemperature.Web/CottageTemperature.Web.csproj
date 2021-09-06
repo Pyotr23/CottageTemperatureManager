@@ -21,6 +21,7 @@
     <ItemGroup>
       <ProjectReference Include="..\libraries\Libraries.Configuration\Libraries.Configuration.csproj" />
       <ProjectReference Include="..\libraries\Libraries.Core\Libraries.Core.csproj" />
+      <ProjectReference Include="..\libraries\Libraries.IO\Libraries.IO.csproj" />
       <ProjectReference Include="..\libraries\Libraries.MediatR\Libraries.MediatR.csproj" />
       <ProjectReference Include="..\libraries\Libraries.Telegram\Libraries.Telegram.csproj" />
     </ItemGroup>

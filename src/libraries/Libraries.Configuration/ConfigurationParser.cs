@@ -1,3 +1,4 @@
+using System;
 using CottageTemperature.Libraries.Configuration.Sections;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,26 @@ namespace CottageTemperature.Libraries.Configuration
                 
                 _logger.LogError("Error when extracting a token");
                 return string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///     The name of the port to which the temperature control controller is connected.
+        /// </summary>
+        public string TemperatureControlComPortName
+        {
+            get
+            {
+                var portName = _configuration
+                    .GetSection(nameof(ComPorts))
+                    .Get<ComPorts>()?
+                    .TemperatureControl;
+
+                if (portName is not null)
+                    return portName;
+                
+                 _logger.LogError("Temperature control COM-port not found");
+                 return string.Empty;
             }
         }
             
