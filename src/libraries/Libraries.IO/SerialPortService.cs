@@ -10,18 +10,24 @@ namespace CottageTemperature.Libraries.IO
     public class SerialPortService : ISerialPortService
     {
         private readonly ILogger<SerialPortService> _logger;
-        private readonly Port _masterPort;
+        private readonly SerialPortWrapper _masterPort;
+        private readonly IBotService _botService;
 
         /// <summary>
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
         /// <param name="configuration"> Configuration. </param>
-        public SerialPortService(ILogger<SerialPortService> logger, ConfigurationParser configuration)
+        public SerialPortService(ILogger<SerialPortService> logger, 
+            ConfigurationParser configuration,
+            IBotService botService)
         {
             _logger = logger;
+            
             var name = configuration.TemperatureControlComPortName;
-            _masterPort = new Port(name);
+            _masterPort = new SerialPortWrapper(name);
+
+            _botService = botService;
         }
 
         /// <inheritdoc cref="ISerialPortService.Write"/>
@@ -42,5 +48,12 @@ namespace CottageTemperature.Libraries.IO
                 _logger.LogError(exception, "Port \"{portName}\" already used", _masterPort.Name);
             }
         }
+
+        public void StartListening()
+        {
+            _masterPort.ReadingLineNotify += await _botService
+        }
+        
+        private 
     }
 }

@@ -1,4 +1,6 @@
-﻿using CottageTemperature.Libraries.Configuration;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using CottageTemperature.Libraries.Configuration;
 using CottageTemperature.Libraries.Core.Services;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
@@ -22,6 +24,13 @@ namespace CottageTemperature.Libraries.Telegram
         {
             _logger = logger;
             Client = new TelegramBotClient(configuration.AccessToken);
+        }
+
+        public async Task SendTextMessageAsync(long chatId, 
+            string message, 
+            CancellationToken cancellationToken = default)
+        {
+            await Client.SendTextMessageAsync(chatId, message, cancellationToken: cancellationToken);
         }
     }
 }
