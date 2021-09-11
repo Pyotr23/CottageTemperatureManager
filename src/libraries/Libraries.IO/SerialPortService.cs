@@ -6,12 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace CottageTemperature.Libraries.IO
 {
-    /// <inheritdoc cref="ISerialPortService"/>
-    public class SerialPortService : ISerialPortService
+    /// <inheritdoc cref="IPortService"/>
+    public class SerialPortService : IPortService
     {
         private readonly ILogger<SerialPortService> _logger;
         private readonly SerialPortWrapper _masterPort;
-        private readonly IBotService _botService;
 
         /// <summary>
         ///     Constructor.
@@ -19,18 +18,15 @@ namespace CottageTemperature.Libraries.IO
         /// <param name="logger"> Logger instance. </param>
         /// <param name="configuration"> Configuration. </param>
         public SerialPortService(ILogger<SerialPortService> logger, 
-            ConfigurationParser configuration,
-            IBotService botService)
+            ConfigurationParser configuration)
         {
             _logger = logger;
             
             var name = configuration.TemperatureControlComPortName;
             _masterPort = new SerialPortWrapper(name);
-
-            _botService = botService;
         }
 
-        /// <inheritdoc cref="ISerialPortService.Write"/>
+        /// <inheritdoc cref="IPortService.Write"/>
         public void Write(string text)
         {
             if (!_masterPort.IsValid())
@@ -49,11 +45,18 @@ namespace CottageTemperature.Libraries.IO
             }
         }
 
-        public void StartListening()
+        /// <inheritdoc cref="IPortService.SubscribeToReceiveLine"/>
+        public void SubscribeToReceiveLine(Func<string, Task> handler)
         {
-            _masterPort.ReadingLineNotify += await _botService
+            _masterPort.ReadingLineNotify += handler;
+            _masterPort.Open();
         }
         
-        private 
+        /// <inheritdoc cref="IPortService.UnsubscribeToReceiveLine"/>
+        public void UnsubscribeToReceiveLine(Func<string, Task> handler)
+        {
+            _masterPort.ReadingLineNotify -= handler;
+            _masterPort.Close();
+        }
     }
 }

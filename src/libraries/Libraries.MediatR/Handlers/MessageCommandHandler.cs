@@ -38,6 +38,9 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
                 case BotCommand.Info:
                     command = new InfoCommand(request.Message);
                     break;
+                case BotCommand.Start:
+                    command = new StartCommand(request.Message);
+                    break;
                 default:
                     _logger.LogWarning("Unknown bot command \"{Text}\"", request.Text);
                     return Unit.Value;

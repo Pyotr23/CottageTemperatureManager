@@ -7,14 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace CottageTemperature.Libraries.MediatR.Handlers
 {
-    public class StartCommandHandler : IRequestHandler<StartCommand>
+    public class StopCommandHandler : IRequestHandler<StopCommand>
     {
-        private readonly ILogger<StartCommandHandler> _logger;
+        private readonly ILogger<StopCommandHandler> _logger;
         private readonly IPortService _portService;
         private readonly IBotService _botService;
         private long _chatId;
 
-        public StartCommandHandler(ILogger<StartCommandHandler> logger, 
+        public StopCommandHandler(ILogger<StopCommandHandler> logger, 
             IPortService portService,
             IBotService botService)
         {
@@ -23,11 +23,11 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
             _botService = botService;
         }
         
-        public async Task<Unit> Handle(StartCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(StopCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("[{id}] Handle the start command", request.Id);
             _chatId = request.ChatId;
-            _portService.SubscribeToReceiveLine(SendMessageAsync);
+            _portService.UnsubscribeToReceiveLine(SendMessageAsync);
             return Unit.Value;
         }
 

@@ -13,13 +13,13 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
     public class InfoCommandHandler : IRequestHandler<InfoCommand>
     {
         private readonly ILogger<InfoCommandHandler> _logger;
-        private readonly ISerialPortService _serialPortService;
+        private readonly IPortService _serialPortService;
 
         /// <summary>
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
-        public InfoCommandHandler(ILogger<InfoCommandHandler> logger, ISerialPortService serialPortService)
+        public InfoCommandHandler(ILogger<InfoCommandHandler> logger, IPortService serialPortService)
         {
             _logger = logger;
             _serialPortService = serialPortService;

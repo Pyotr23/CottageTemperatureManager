@@ -9,5 +9,10 @@ namespace CottageTemperature.Libraries.Core.Constants
         ///     Comand for getting information.
         /// </summary>
         public const string Info = "/info";
+        
+        /// <summary>
+        ///     Comand for bot starting.
+        /// </summary>
+        public const string Start = "/start";
     }
 }

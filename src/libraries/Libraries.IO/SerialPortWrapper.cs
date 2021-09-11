@@ -1,18 +1,42 @@
+using System;
 using System.IO.Ports;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CottageTemperature.Libraries.IO
 {
-    internal class SerialPortWrapper 
+    public class SerialPortWrapper 
     {
         private readonly SerialPort _port;
+
+        // internal delegate Task ReadLineHandler(string line);
+
+        private event Func<string, Task>? _readingLineNotify;
         
+        internal event Func<string, Task>? ReadingLineNotify
+        {
+            add
+            {
+                _port.DataReceived += DataReceivedHandler;
+                _readingLineNotify += value;
+            }
+            remove
+            {
+                _port.DataReceived -= DataReceivedHandler;
+                _readingLineNotify -= value;
+            }
+        }
+
         internal string Name { get; }
         
         internal SerialPortWrapper(string name)
         {
             Name = name;
-            _port = new SerialPort(name);
+            _port = new SerialPort(name)
+            {
+                Encoding = Encoding.UTF8
+            };
         }
 
         internal void Write(string text)
@@ -29,28 +53,23 @@ namespace CottageTemperature.Libraries.IO
                 .Any(portName => portName == Name);
         }
 
-        internal delegate string ReadLineHandler(string line);
-
-        private event ReadLineHandler? Notify;
-        
-        internal event ReadLineHandler? ReadingLineNotify
+        internal void Open()
         {
-            add
-            {
-                Notify += value;
-                _port.DataReceived += DataReceivedHandler;
-            }
-            remove
-            {
-                Notify -= value;
-                _port.DataReceived -= DataReceivedHandler;
-            }
+            if (_port.IsOpen)
+                return;
+            _port.Open();
+        }
+        
+        internal void Close()
+        {
+            if (_port.IsOpen)
+                _port.Close();
         }
 
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs args)
         {
             var line = _port.ReadLine();
-            Notify?.Invoke(line);
+            _readingLineNotify?.Invoke(line);
         }
     }
 }

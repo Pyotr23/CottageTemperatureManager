@@ -3,12 +3,13 @@ using CottageTemperature.Libraries.Core.DTOes.Telegram;
 namespace CottageTemperature.Libraries.MediatR.Commands
 {
     /// <summary>
-    ///     Start bot command.
+    ///     Command for stopping bot.
     /// </summary>
-    public record StartCommand : BaseCommand
+    public record StopCommand : BaseCommand
     {
         /// <inheritdoc />
-        public StartCommand(Message message) : base(message)
-        { }
+        public StopCommand(Message message) : base(message)
+        {
+        }
     }
 }
