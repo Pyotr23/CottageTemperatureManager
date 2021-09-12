@@ -32,5 +32,7 @@ namespace CottageTemperature.Libraries.Telegram
         {
             await Client.SendTextMessageAsync(chatId, message, cancellationToken: cancellationToken);
         }
+        
+        
     }
 }

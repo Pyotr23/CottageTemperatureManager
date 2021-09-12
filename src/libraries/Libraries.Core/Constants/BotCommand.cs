@@ -14,5 +14,10 @@ namespace CottageTemperature.Libraries.Core.Constants
         ///     Comand for bot starting.
         /// </summary>
         public const string Start = "/start";
+
+        /// <summary>
+        ///     Command for bot stopping.
+        /// </summary>
+        public const string Stop = "/stop";
     }
 }

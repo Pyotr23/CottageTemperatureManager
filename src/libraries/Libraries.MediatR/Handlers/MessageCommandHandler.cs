@@ -31,15 +31,19 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
         {
             _logger.LogInformation("Start message {MessageId} handler", request.Id);
 
+            var message = request.Message;
             BaseCommand command;
 
             switch (request.Text?.ToLower())
             {
                 case BotCommand.Info:
-                    command = new InfoCommand(request.Message);
+                    command = new InfoCommand(message);
                     break;
                 case BotCommand.Start:
-                    command = new StartCommand(request.Message);
+                    command = new StartCommand(message);
+                    break;
+                case BotCommand.Stop:
+                    command = new StopCommand(message);
                     break;
                 default:
                     _logger.LogWarning("Unknown bot command \"{Text}\"", request.Text);

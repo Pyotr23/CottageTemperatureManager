@@ -42,7 +42,7 @@ namespace CottageTemperature.Web
                 .AddAutoMapper(config => config.AddProfile<TelegramMapperProfile>())
                 .AddConfigurationParser(Configuration)
                 .AddTransient<IBotService, BotService>()
-                .AddTransient<IPortService, SerialPortService>()
+                .AddSingleton<IPortService, SerialPortService>()
                 .AddScoped<IRequestHandler<InfoCommand, Unit>, InfoCommandHandler>()
                 .AddScoped<IRequestHandler<StartCommand, Unit>, StartCommandHandler>()
                 .AddScoped<IRequestHandler<StopCommand, Unit>, StopCommandHandler>()
