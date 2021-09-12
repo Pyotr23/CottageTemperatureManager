@@ -10,8 +10,7 @@ namespace CottageTemperature.Libraries.IO
     {
         private readonly SerialPort _port;
 
-        // internal delegate Task ReadLineHandler(string line);
-
+        // ReSharper disable once InconsistentNaming
         private event Func<string, Task>? _readingLineNotify;
         
         internal event Func<string, Task>? ReadingLineNotify
@@ -58,6 +57,7 @@ namespace CottageTemperature.Libraries.IO
             if (_port.IsOpen)
                 return;
             _port.Open();
+            _port.ReadExisting();
         }
         
         internal void Close()

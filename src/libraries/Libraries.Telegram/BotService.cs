@@ -27,6 +27,12 @@ namespace CottageTemperature.Libraries.Telegram
             Client = new TelegramBotClient(configuration.AccessToken);
         }
 
+        /// <summary>
+        ///     Send text message.
+        /// </summary>
+        /// <param name="chatId"> Chat identificator. </param>
+        /// <param name="message"> Response message. </param>
+        /// <param name="cancellationToken"> Cancellation token. </param>
         public async Task SendTextMessageAsync(long chatId, 
             string message, 
             CancellationToken cancellationToken = default)

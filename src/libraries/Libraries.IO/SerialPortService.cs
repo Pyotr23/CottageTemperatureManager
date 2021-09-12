@@ -10,7 +10,10 @@ namespace CottageTemperature.Libraries.IO
     public class SerialPortService : IPortService
     {
         private readonly ILogger<SerialPortService> _logger;
-        private readonly SerialPortWrapper _masterPort;
+        private readonly SerialPortWrapper _port;
+
+        /// <inheritdoc cref="IPortService.PortName"/>
+        public string PortName => _port.Name;
 
         /// <summary>
         ///     Constructor.
@@ -23,40 +26,40 @@ namespace CottageTemperature.Libraries.IO
             _logger = logger;
             
             var name = configuration.TemperatureControlComPortName;
-            _masterPort = new SerialPortWrapper(name);
+            _port = new SerialPortWrapper(name);
         }
 
         /// <inheritdoc cref="IPortService.Write"/>
         public void Write(string text)
         {
-            if (!_masterPort.IsValid())
+            if (!_port.IsValid())
             {
-                _logger.LogError("No COM-port with name \"{name}\"", _masterPort.Name);
+                _logger.LogError("No COM-port with name \"{PortName}\"", PortName);
                 return;
             }
 
             try
             {
-                _masterPort.Write(text);
+                _port.Write(text);
             }
             catch (UnauthorizedAccessException exception)
             {
-                _logger.LogError(exception, "Port \"{portName}\" already used", _masterPort.Name);
+                _logger.LogError(exception, "Port \"{PortName}\" already used", PortName);
             }
         }
 
         /// <inheritdoc cref="IPortService.SubscribeToReceiveLine"/>
         public void SubscribeToReceiveLine(Func<string, Task> handler)
         {
-            _masterPort.ReadingLineNotify += handler;
-            _masterPort.Open();
+            _port.ReadingLineNotify += handler;
+            _port.Open();
         }
         
         /// <inheritdoc cref="IPortService.UnsubscribeToReceiveLine"/>
         public void UnsubscribeToReceiveLine(Func<string, Task> handler)
         {
-            _masterPort.ReadingLineNotify -= handler;
-            _masterPort.Close();
+            _port.ReadingLineNotify -= handler;
+            _port.Close();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CottageTemperature.Libraries.Core.Constants;
 using CottageTemperature.Libraries.MediatR.Commands;
+using CottageTemperature.Libraries.MediatR.Constants;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

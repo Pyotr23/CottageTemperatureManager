@@ -1,23 +1,23 @@
-namespace CottageTemperature.Libraries.Core.Constants
+namespace CottageTemperature.Libraries.MediatR.Constants
 {
     /// <summary>
     ///     Bot commands.
     /// </summary>
-    public static class BotCommand
+    internal static class BotCommand
     {
         /// <summary>
         ///     Comand for getting information.
         /// </summary>
-        public const string Info = "/info";
+        internal const string Info = "/info";
         
         /// <summary>
         ///     Comand for bot starting.
         /// </summary>
-        public const string Start = "/start";
+        internal const string Start = "/start";
 
         /// <summary>
         ///     Command for bot stopping.
         /// </summary>
-        public const string Stop = "/stop";
+        internal const string Stop = "/stop";
     }
 }

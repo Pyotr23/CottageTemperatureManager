@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CottageTemperature.Libraries.Core.Services;
 using CottageTemperature.Libraries.MediatR.Commands;
+using CottageTemperature.Libraries.MediatR.Constants;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -35,8 +36,12 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
         public async Task<Unit> Handle(StopCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("[{Id}] Handle the start command", request.Id);
+            
             _portService.UnsubscribeToReceiveLine(async text => 
                 await _botService.SendTextMessageAsync(request.ChatId, text, cancellationToken));
+            
+            await _botService.SendTextMessageAsync(request.ChatId, BotMessage.Unsubscribe, cancellationToken);
+
             return Unit.Value;
         }
     }

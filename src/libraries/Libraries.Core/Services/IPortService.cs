@@ -9,6 +9,11 @@ namespace CottageTemperature.Libraries.Core.Services
     public interface IPortService
     {
         /// <summary>
+        ///     Name of the managed port.
+        /// </summary>
+        string PortName { get; }
+        
+        /// <summary>
         ///     Write text to serial port.
         /// </summary>
         /// <param name="text"> Text. </param>
