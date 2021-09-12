@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace CottageTemperature.Libraries.Core.Services
 {
     /// <summary>
-    ///     Service for working with serial port.
+    ///     Service for working with port.
     /// </summary>
     public interface IPortService
     {

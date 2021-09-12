@@ -13,16 +13,17 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
     public class InfoCommandHandler : IRequestHandler<InfoCommand>
     {
         private readonly ILogger<InfoCommandHandler> _logger;
-        private readonly IPortService _serialPortService;
+        private readonly IPortService _portService;
 
         /// <summary>
         ///     Constructor.
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
-        public InfoCommandHandler(ILogger<InfoCommandHandler> logger, IPortService serialPortService)
+        /// <param name="portService"> Service for working with port. </param>
+        public InfoCommandHandler(ILogger<InfoCommandHandler> logger, IPortService portService)
         {
             _logger = logger;
-            _serialPortService = serialPortService;
+            _portService = portService;
         }
         
         /// <inheritdoc cref="IRequestHandler{TRequest,TResponse}"/>
@@ -36,7 +37,7 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
                 return Unit.Value;
             }
                 
-            _serialPortService.Write(request.Text);
+            _portService.Write(request.Text);
             return Unit.Value;
         }
     }

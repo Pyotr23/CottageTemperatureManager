@@ -7,13 +7,21 @@ using Microsoft.Extensions.Logging;
 
 namespace CottageTemperature.Libraries.MediatR.Handlers
 {
+    /// <summary>
+    ///     Handler of stop bot command.
+    /// </summary>
     public class StopCommandHandler : IRequestHandler<StopCommand>
     {
         private readonly ILogger<StopCommandHandler> _logger;
         private readonly IPortService _portService;
         private readonly IBotService _botService;
-        private long _chatId;
 
+        /// <summary>
+        ///     Constructor.    
+        /// </summary>
+        /// <param name="logger"> Logger instance. </param>
+        /// <param name="portService"> Service for working with port. </param>
+        /// <param name="botService"> Service for managing telegram bot client. </param>
         public StopCommandHandler(ILogger<StopCommandHandler> logger, 
             IPortService portService,
             IBotService botService)
@@ -23,17 +31,13 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
             _botService = botService;
         }
         
+        /// <inheritdoc cref="IRequestHandler{TRequest,TResponse}"/>
         public async Task<Unit> Handle(StopCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[{id}] Handle the start command", request.Id);
-            _chatId = request.ChatId;
-            _portService.UnsubscribeToReceiveLine(SendMessageAsync);
+            _logger.LogInformation("[{Id}] Handle the start command", request.Id);
+            _portService.UnsubscribeToReceiveLine(async text => 
+                await _botService.SendTextMessageAsync(request.ChatId, text, cancellationToken));
             return Unit.Value;
-        }
-
-        private async Task SendMessageAsync(string messageText)
-        {
-            await _botService.SendTextMessageAsync(_chatId, messageText);
         }
     }
 }

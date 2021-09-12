@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using CottageTemperature.Libraries.Configuration;
 using CottageTemperature.Libraries.Core.Services;
@@ -32,7 +33,5 @@ namespace CottageTemperature.Libraries.Telegram
         {
             await Client.SendTextMessageAsync(chatId, message, cancellationToken: cancellationToken);
         }
-        
-        
     }
 }
