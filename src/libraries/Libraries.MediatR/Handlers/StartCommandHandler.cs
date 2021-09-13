@@ -41,6 +41,8 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
                 await _botService.SendTextMessageAsync(request.ChatId, text, cancellationToken));
 
             await _botService.SendTextMessageAsync(request.ChatId, BotMessage.Subscribe, cancellationToken);
+            
+            _portService.Write(BotCommand.Info);
                 
             return Unit.Value;
         }

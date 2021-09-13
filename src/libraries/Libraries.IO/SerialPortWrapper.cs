@@ -40,6 +40,12 @@ namespace CottageTemperature.Libraries.IO
 
         internal void Write(string text)
         {
+            if (_port.IsOpen)
+            {
+                _port.Write(text);
+                return;
+            }
+            
             _port.Open();
             _port.Write(text);
             _port.Close();
