@@ -36,9 +36,6 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
 
             switch (request.Text?.ToLower())
             {
-                case BotCommand.Info:
-                    command = new InfoCommand(message);
-                    break;
                 case BotCommand.Start:
                     command = new StartCommand(message);
                     break;
@@ -46,8 +43,8 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
                     command = new StopCommand(message);
                     break;
                 default:
-                    _logger.LogWarning("Unknown bot command \"{Text}\"", request.Text);
-                    return Unit.Value;
+                    command = new Command(message);;
+                    break;
             }
 
             await _mediator.Send(command, cancellationToken);

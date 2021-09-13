@@ -43,7 +43,7 @@ namespace CottageTemperature.Web
                 .AddConfigurationParser(Configuration)
                 .AddTransient<IBotService, BotService>()
                 .AddSingleton<IPortService, SerialPortService>()
-                .AddScoped<IRequestHandler<InfoCommand, Unit>, InfoCommandHandler>()
+                .AddScoped<IRequestHandler<Command, Unit>, CommandHandler>()
                 .AddScoped<IRequestHandler<StartCommand, Unit>, StartCommandHandler>()
                 .AddScoped<IRequestHandler<StopCommand, Unit>, StopCommandHandler>()
                 .AddControllers()

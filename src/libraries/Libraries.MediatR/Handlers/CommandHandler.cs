@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 namespace CottageTemperature.Libraries.MediatR.Handlers
 {
     /// <summary>
-    ///     Handler of info command.
+    ///     Handler of simple command.
     /// </summary>
-    public class InfoCommandHandler : IRequestHandler<InfoCommand>
+    public class CommandHandler : IRequestHandler<Command>
     {
-        private readonly ILogger<InfoCommandHandler> _logger;
+        private readonly ILogger<CommandHandler> _logger;
         private readonly IPortService _portService;
 
         /// <summary>
@@ -20,16 +20,16 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
         /// </summary>
         /// <param name="logger"> Logger instance. </param>
         /// <param name="portService"> Service for working with port. </param>
-        public InfoCommandHandler(ILogger<InfoCommandHandler> logger, IPortService portService)
+        public CommandHandler(ILogger<CommandHandler> logger, IPortService portService)
         {
             _logger = logger;
             _portService = portService;
         }
         
         /// <inheritdoc cref="IRequestHandler{TRequest,TResponse}"/>
-        public async Task<Unit> Handle(InfoCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Information command processing begins");
+            _logger.LogInformation("Command {Command} processing begins", request.Text);
 
             if (request.Text is null)
             {

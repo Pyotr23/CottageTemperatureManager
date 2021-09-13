@@ -3,12 +3,12 @@ using CottageTemperature.Libraries.Core.DTOes.Telegram;
 namespace CottageTemperature.Libraries.MediatR.Commands
 {
     /// <summary>
-    ///     Info command.
+    ///     Simple command.
     /// </summary>
-    public record InfoCommand : BaseCommand
+    public record Command : BaseCommand
     {
         /// <inheritdoc />
-        public InfoCommand(Message message) : base(message)
+        public Command(Message message) : base(message)
         { }
     }
 }
