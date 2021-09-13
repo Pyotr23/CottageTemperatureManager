@@ -11,6 +11,7 @@ namespace CottageTemperature.Libraries.IO
     {
         private readonly ILogger<SerialPortService> _logger;
         private readonly SerialPortWrapper _port;
+        private Func<string, Task> _handler;
 
         /// <inheritdoc cref="IPortService.PortName"/>
         public string PortName => _port.Name;
@@ -52,13 +53,14 @@ namespace CottageTemperature.Libraries.IO
         public void SubscribeToReceiveLine(Func<string, Task> handler)
         {
             _port.ReadingLineNotify += handler;
+            _handler = handler;
             _port.Open();
         }
         
         /// <inheritdoc cref="IPortService.UnsubscribeToReceiveLine"/>
-        public void UnsubscribeToReceiveLine(Func<string, Task> handler)
+        public void UnsubscribeToReceiveLine()
         {
-            _port.ReadingLineNotify -= handler;
+            _port.ReadingLineNotify -= _handler;
             _port.Close();
         }
     }

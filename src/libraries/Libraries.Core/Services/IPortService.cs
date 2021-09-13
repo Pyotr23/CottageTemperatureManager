@@ -28,7 +28,6 @@ namespace CottageTemperature.Libraries.Core.Services
         /// <summary>
         ///     Unsubscribe to receive line.
         /// </summary>
-        /// <param name="handler"> Handler. </param>
-        void UnsubscribeToReceiveLine(Func<string, Task> handler);
+        void UnsubscribeToReceiveLine();
     }
 }

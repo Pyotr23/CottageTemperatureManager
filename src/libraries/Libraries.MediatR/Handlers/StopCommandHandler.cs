@@ -37,8 +37,7 @@ namespace CottageTemperature.Libraries.MediatR.Handlers
         {
             _logger.LogInformation("[{Id}] Handle the start command", request.Id);
             
-            _portService.UnsubscribeToReceiveLine(async text => 
-                await _botService.SendTextMessageAsync(request.ChatId, text, cancellationToken));
+            _portService.UnsubscribeToReceiveLine();
             
             await _botService.SendTextMessageAsync(request.ChatId, BotMessage.Unsubscribe, cancellationToken);
 
